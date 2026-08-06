@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+
+        bool rows[9][9] = {false};
+        bool cols[9][9] = {false};
+        bool boxes[9][9] = {false};
+
+        for(int row = 0; row < 9; row++) {
+
+            for(int col = 0; col < 9; col++) {
+
+                // Skip empty cells
+                if(board[row][col] == '.')
+                    continue;
+
+                // Convert '1'..'9' to 0..8
+                int num = board[row][col] - '1';
+
+                // Find box number
+                int box = (row / 3) * 3 + (col / 3);
+
+                // Duplicate found
+                if(rows[row][num] ||
+                   cols[col][num] ||
+                   boxes[box][num]) {
+
+                    return false;
+                }
+
+                // Mark the number as seen
+                rows[row][num] = true;
+                cols[col][num] = true;
+                boxes[box][num] = true;
+            }
+        }
+
+        return true;
+    }
+};
