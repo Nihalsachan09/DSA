@@ -1,0 +1,54 @@
+class Solution {
+public:
+
+    int solve(int count,vector<int>&dp){
+        if(count==0){
+            return 0;
+        }
+        if(count==1||count<0){
+            return -1;
+        }
+        if(dp[count]!=-2){
+            return dp[count];
+        }
+
+        int take2=solve(count-2,dp);
+        int take3=solve(count-3,dp);
+
+        if(take2==-1&&take3==-1){
+            return dp[count]=-1;
+        }
+        if(take2==-1){
+            return dp[count]=1+take3;
+        }
+        if(take3==-1){
+            return dp[count]=1+take2;
+        }
+        return dp[count]=1+min(take2,take3);
+    }
+
+
+    int minimumRounds(vector<int>& tasks) {
+
+        unordered_map<int,int>freq;
+
+        for(int task:tasks){
+            freq[task]++;
+        }
+        int ans=0;
+
+        for(auto &it:freq){
+            int count = it.second;
+
+            vector<int>dp(count+1,-2);
+
+            int rounds=solve(count,dp);
+
+            if(rounds==-1){
+                return -1;
+            }
+            ans+=rounds;
+        }
+        return ans;
+    }
+};
