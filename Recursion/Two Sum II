@@ -1,0 +1,27 @@
+class Solution {
+public:
+
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        return solve(numbers, target, 0, numbers.size() - 1);
+    }
+
+    vector<int> solve(vector<int>& numbers, int target, int left, int right) {
+
+        // Base case
+        if (left >= right)
+            return {};
+
+        int sum = numbers[left] + numbers[right];
+
+        // Pair found
+        if (sum == target)
+            return {left + 1, right + 1};
+
+        // Sum is too small
+        if (sum < target)
+            return solve(numbers, target, left + 1, right);
+
+        // Sum is too large
+        return solve(numbers, target, left, right - 1);
+    }
+};
