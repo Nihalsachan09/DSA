@@ -1,0 +1,28 @@
+class Solution {
+public:
+
+    bool check(vector<int>& nums) {
+        int n = nums.size();
+
+        // Recursively count order breaks
+        int breaks = countBreaks(nums, 0);
+
+        // Check circular connection
+        if (nums[n - 1] > nums[0])
+            breaks++;
+
+        return breaks <= 1;
+    }
+
+    int countBreaks(vector<int>& nums, int i) {
+        // Stop before the last element
+        if (i == nums.size() - 1)
+            return 0;
+
+        // Current pair is out of sorted order
+        int currentBreak = (nums[i] > nums[i + 1]) ? 1 : 0;
+
+        // Recursively check remaining pairs
+        return currentBreak + countBreaks(nums, i + 1);
+    }
+};
