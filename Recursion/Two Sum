@@ -1,0 +1,26 @@
+class Solution {
+public:
+
+    vector<int> twoSum(vector<int>& nums, int target) {
+        return findPair(nums, target, 0, 1);
+    }
+
+    vector<int> findPair(vector<int>& nums, int target, int i, int j) {
+
+        // If i reaches the last element, no pair exists
+        if (i >= nums.size() - 1)
+            return {};
+
+        // If j reaches the end, move i to the next element
+        if (j >= nums.size()) {
+            return findPair(nums, target, i + 1, i + 2);
+        }
+
+        // Check current pair
+        if (nums[i] + nums[j] == target)
+            return {i, j};
+
+        // Move j to the next element
+        return findPair(nums, target, i, j + 1);
+    }
+};
