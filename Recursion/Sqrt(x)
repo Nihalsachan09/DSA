@@ -1,0 +1,32 @@
+class Solution {
+public:
+
+    long long solve(long long x,long long l,long long r){
+        if(l>r){
+            return r;
+        }
+        
+        long long mid = (l+(r-l)/2);
+
+        if(mid*mid==x){
+            return mid;
+        }
+        if(mid*mid<x){
+            return solve(x,mid+1,r);
+        }
+        else{
+            return solve(x,l,mid-1);
+        }
+    }
+
+    
+    int mySqrt(int x) {
+
+        if(x<2){
+            return x;
+        }
+        else{
+            return solve(x,1,x/2);
+        }
+    }
+};
