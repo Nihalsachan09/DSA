@@ -1,0 +1,19 @@
+class Solution {
+public:
+    long long reverseNumber(int x, long long rev) {
+        if (x == 0)
+            return rev;
+
+        return reverseNumber(x / 10, rev * 10 + x % 10);
+    }
+
+    bool isPalindrome(int x) {
+        if (x < 0)
+            return false;
+
+        int original = x;
+        long long reversed = reverseNumber(x, 0);
+
+        return original == reversed;
+    }
+};
