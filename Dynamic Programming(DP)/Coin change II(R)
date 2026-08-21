@@ -1,0 +1,29 @@
+class Solution {
+public:
+
+    int count(vector<int>& coins, int n, int sum) {
+
+        // Base case
+        if (sum == 0) {
+            return 1;
+        }
+
+        if (sum < 0) {
+            return 0;
+        }
+
+        if (n <= 0) {
+            return 0;
+        }
+
+        return count(coins, n - 1, sum)
+             + count(coins, n, sum - coins[n - 1]);
+    }
+
+    int change(int amount, vector<int>& coins) {
+
+        int n = coins.size();
+
+        return count(coins, n, amount);
+    }
+};
