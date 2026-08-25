@@ -1,0 +1,42 @@
+class Solution {
+public:
+    
+    int maxDepth(TreeNode* root) {
+
+        //base case
+        if(root==NULL){
+            return 0;
+        }
+
+        int left=maxDepth(root->left);
+        int right=maxDepth(root->right);
+
+        int ans=max(left,right)+1;
+        return ans;
+    }
+
+    void printlevel(TreeNode* root,int level,vector<int>&ans){
+        if(root==NULL){
+            return;
+        }
+        if(level==1){
+            ans.push_back(root->val);
+        }
+        printlevel(root->left,level-1,ans);
+        printlevel(root->right,level-1,ans);
+    }
+
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        
+        vector<vector<int>>ans;
+
+        int h=maxDepth(root);
+
+        for(int level=1;level<=h;level++){
+            vector<int>current;
+            printlevel(root,level,current);
+            ans.push_back(current);
+        }  
+    return ans; 
+    }
+};
