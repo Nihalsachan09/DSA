@@ -1,0 +1,39 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void moveNegativesToEnd(vector<int>& arr) {
+    int left = 0;
+    int right = (int)arr.size() - 1;
+
+    while (left < right) {
+        // Find a non-negative element on the left
+        while (left < right && arr[left] >= 0) {
+            left++;
+        }
+
+        // Find a negative element on the right
+        while (left < right && arr[right] < 0) {
+            right--;
+        }
+
+        // Put them in their correct groups
+        if (left < right) {
+            swap(arr[left], arr[right]);
+            left++;
+            right--;
+        }
+    }
+}
+
+int main() {
+    vector<int> arr = {1, -2, 3, -4, 5, -6};
+
+    moveNegativesToEnd(arr);
+
+    for (int x : arr) {
+        cout << x << " ";
+    }
+
+    return 0;
+}
