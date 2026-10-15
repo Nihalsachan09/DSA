@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int kthSmallest(vector<int>& arr, int k) {
+    priority_queue<int> pq;  // Max heap
+
+    for (int x : arr) {
+        pq.push(x);
+
+        if (pq.size() > k) {
+            pq.pop();
+        }
+    }
+
+    return pq.top();
+}
+
+int main() {
+    vector<int> arr = {7, 10, 4, 3, 20, 15};
+    int k = 3;
+
+    cout << kthSmallest(arr, k) << '\n';
+    return 0;
+}
